@@ -1,4 +1,0 @@
-<html>
-	<applet code="REPLACETHIS.class" width="500" height="500">
-</applet>
-</html>
