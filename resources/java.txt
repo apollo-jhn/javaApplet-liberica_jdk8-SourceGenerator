@@ -1,3 +1,9 @@
 import java.awt.*;
 import java.applet.*;
 import java.awt.event.*;
+
+public class PLACEHOLDER extends Applet{
+	// Start to code here paps
+	// tanggaling motong message kung mag co-code kana
+	// Goodluck paps
+}

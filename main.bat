@@ -1,9 +1,13 @@
+:: This program/script was made by apollo-jhn(Ponteras, John Apollo S.)
+:: Student from Dr. Filemon C. Aguilar Memorial College - IT Campus
+:: Program: Bachelor of Science in Computer Engineering - 2nd Year
+
 :: PROGRAM DETAILS
 :: This Program is licensed Under : MIT
 :: ABOUT :>
 :: This script is to create a source file containing JDK 8 for creating Java Applet Programs in an instant.
-:: Just run it, specify the location, wait for the download to be finished and ready to go.
-:: this script provide the source file as starter and a "compile and run" script to compile and run the applet
+:: Just run it, specify the location, wait the process to be finished and ready to go.
+:: this script provide the source file as starter with a "compile and run" script to compile and run the applet
 :: program.
 
 @echo off
@@ -34,13 +38,14 @@ set PROJECTNAME_NOSPACE=%PROJECTNAME: =_%
 set DESTINATION_PATH=^"%FILEPATH%\%PROJECTNAME%\^"
 set DESTIN_PATH_SRC=^"%FILEPATH%\%PROJECTNAME%\src^"
 
-:: Extract JDK 8
+:: This part copies the Java 8 SDK and extract it then delete it after
+:: Extracting it.
 xcopy .\resources\jdk8.zip %DESTINATION_PATH%
 set JDK_LOCATION=^"%FILEPATH%\%PROJECTNAME%\jdk8.zip^"
 Call :UnZipFile %DESTINATION_PATH% %JDK_LOCATION%
 del %JDK_LOCATION%
 
-:: Copy resources
+:: Copy resources to path specified
 xcopy .\resources\java.txt %DESTIN_PATH_SRC%
 xcopy .\resources\html.txt %DESTIN_PATH_SRC%
 xcopy .\resources\Compile-and-Run.bat %DESTIN_PATH_SRC%
@@ -48,12 +53,14 @@ xcopy .\resources\Compile-and-Run.bat %DESTIN_PATH_SRC%
 :: Replace Placeholders
 cd %DESTIN_PATH_SRC%
 powershell -Command "(gc html.txt) -replace 'REPLACETHIS', '%PROJECTNAME_NOSPACE%' | Out-File -encoding ASCII html.txt"
+powershell -Command "(gc java.txt) -replace 'PLACEHOLDER', '%PROJECTNAME_NOSPACE%' | Out-File -encoding ASCII java.txt"
 powershell -Command "(gc Compile-and-Run.bat) -replace 'PLACEHOLDER', '%PROJECTNAME_NOSPACE%' | Out-File -encoding ASCII Compile-and-Run.bat"
 
 :: This renames the txt files to specific type
 ren java.txt %PROJECTNAME_NOSPACE%.java
 ren html.txt %PROJECTNAME_NOSPACE%.html
 
+:: End Script
 cls
 call:title
 echo:
@@ -62,7 +69,7 @@ echo The author from the top of the console screen.
 echo:
 echo to close the program
 pause
-exit \B 0
+exit
 
 ::--------------------------------------------------------
 ::-- Function section starts below here
@@ -112,6 +119,7 @@ goto:eof
 goto:eof
 
 :: Unzip the zip filetype :>
+:: Snippet Reference: https://stackoverflow.com/a/21709923
 :UnZipFile <ExtractTo> <newzipfile>
     set vbs="%temp%\_.vbs"
     if exist %vbs% del /f /q %vbs%
@@ -127,3 +135,5 @@ goto:eof
     cscript //nologo %vbs%
     if exist %vbs% del /f /q %vbs%
 goto:eof
+
+:: Kung nabasa mo to nice one, goodluck sa career mo sa bohai.
