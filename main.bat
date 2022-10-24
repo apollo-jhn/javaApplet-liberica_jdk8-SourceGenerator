@@ -50,10 +50,16 @@ xcopy .\resources\java.txt %DESTIN_PATH_SRC%
 xcopy .\resources\html.txt %DESTIN_PATH_SRC%
 xcopy .\resources\Compile-and-Run.bat %DESTIN_PATH_SRC%
 
-:: Replace Placeholders
+:: Replace Placeholders with added 2 second Pauses
 cd %DESTIN_PATH_SRC%
-powershell -Command "(gc html.txt) -replace 'REPLACETHIS', '%PROJECTNAME_NOSPACE%' | Out-File -encoding ASCII html.txt"
+timeout /t 1
+echo HTML TEXT REPLACE PLACEHOLDER INITIALIZED
+powershell -Command "(gc html.txt) -replace 'PLACEHOLDER', '%PROJECTNAME_NOSPACE%' | Out-File -encoding ASCII html.txt"
+timeout /t 1
+echo JAVA TEXT REPLACE PLACEHOLDER INITIALIZED
 powershell -Command "(gc java.txt) -replace 'PLACEHOLDER', '%PROJECTNAME_NOSPACE%' | Out-File -encoding ASCII java.txt"
+timeout /t 1
+echo COMPILE-AND-RUN TEXT REPLACE PLACEHOLDER INITIALIZED
 powershell -Command "(gc Compile-and-Run.bat) -replace 'PLACEHOLDER', '%PROJECTNAME_NOSPACE%' | Out-File -encoding ASCII Compile-and-Run.bat"
 
 :: This renames the txt files to specific type
